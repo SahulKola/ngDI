@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LoggerService } from './services/logger.service';
 import { ExpLoggerService } from './services/exp-logger.service';
 import { legacyLogger } from './services/logger.legacy';
+import { APP_CONFIG, AppConfig } from './services/config.token';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,10 @@ import { legacyLogger } from './services/logger.legacy';
   styleUrl: './app.component.scss',
   providers: [{
     provide: LoggerService,
-    useValue: legacyLogger
+    useFactory: (appConfig: AppConfig) => {
+      return appConfig.experimentalEnabled ? new ExpLoggerService() : new LoggerService()
+    },
+    deps: [APP_CONFIG]
   }] 
 })
 export class AppComponent {

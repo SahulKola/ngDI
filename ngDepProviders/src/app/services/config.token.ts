@@ -7,7 +7,7 @@ export const APP_CONFIG = new InjectionToken<AppConfig>('APP_CONFIG', {
     providedIn: 'root',
     factory() {
         return {
-            experimentalEnabled: true
+            experimentalEnabled: false
         }
     },
 });
