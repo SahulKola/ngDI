@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PollingComponent } from './polling.component';
+import { PollingService } from './polling.service';
 
 @NgModule({
   declarations: [
@@ -9,6 +10,7 @@ import { PollingComponent } from './polling.component';
   ],
   exports: [
     PollingComponent
-  ]
+  ],
+  providers: [PollingService]
 })
 export class PollingModule { }
