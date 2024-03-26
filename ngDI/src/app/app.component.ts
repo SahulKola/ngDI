@@ -1,18 +1,21 @@
-import { Component, Self } from '@angular/core';
+import { Component, Self, SkipSelf } from '@angular/core';
 import { LoggerServiceService } from './services/logger-service.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  // providers: [LoggerServiceService]
+  providers: [LoggerServiceService]
 })
 export class AppComponent {
   title = 'ngDI - Resolution Modifiers';
-  constructor(@Self() private logger :LoggerServiceService){  
+  constructor(@Self() private logger :LoggerServiceService, @SkipSelf() private parentLogger: LoggerServiceService){  
     if(this.logger) {
       this.logger._prefix = 'App Component';
       this.logger.log('constructor init');
+    }
+    if(this.parentLogger){
+      this.parentLogger.log('constructor init');
     }
   }
 }
