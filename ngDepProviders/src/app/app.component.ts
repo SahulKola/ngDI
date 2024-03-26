@@ -8,15 +8,16 @@ import { ExpLoggerService } from './services/exp-logger.service';
   styleUrl: './app.component.scss',
   providers: [{
     provide: LoggerService,
-    useClass: ExpLoggerService
+    useExisting: ExpLoggerService
   }] 
 })
 export class AppComponent {
   title = 'ngDepProviders';
 
-  constructor(private logger: LoggerService){}
+  constructor(private logger: LoggerService, private expLogger: ExpLoggerService){}
   ngOnInit(): void {
     this.logger._prefix = 'App Component',
     this.logger.log('App Component Init')
+    console.log(this.logger === this.expLogger);
   }
 }
