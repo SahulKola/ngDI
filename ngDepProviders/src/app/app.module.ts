@@ -3,17 +3,26 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { APP_CONFIG } from './services/config.token';
+import { BrowserReporterService } from './services/browser-reporter.service';
+import { EngagingReporterService } from './services/engaging-reporter.service';
+import { REPORTERS } from './services/reporter.token';
 
 @NgModule({
-  declarations: [
-    AppComponent
+  declarations: [AppComponent],
+  imports: [BrowserModule, AppRoutingModule],
+  providers: [
+    {
+      provide: REPORTERS,
+      useExisting: BrowserReporterService,
+      multi: true
+    },
+    {
+      provide: REPORTERS,
+      useExisting: EngagingReporterService,
+      multi: true
+    },
+
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
