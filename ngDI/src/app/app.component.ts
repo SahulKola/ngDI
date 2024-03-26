@@ -7,5 +7,6 @@ import { LoggerServiceService } from './services/logger-service.service';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'ngDI';
+  title = 'ngDI - Resolution Modifiers';
+  constructor(@Optional() private logger :LoggerServiceService){}
 }
