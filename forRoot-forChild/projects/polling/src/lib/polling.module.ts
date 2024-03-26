@@ -1,16 +1,29 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { PollingComponent } from './polling.component';
-import { PollingService } from './polling.service';
+import { INTERVAL, PollingConfig, PollingService } from './polling.service';
 
 @NgModule({
-  declarations: [
-    PollingComponent
-  ],
-  imports: [
-  ],
-  exports: [
-    PollingComponent
-  ],
-  providers: [PollingService]
+  declarations: [PollingComponent],
+  imports: [],
+  exports: [PollingComponent],
 })
-export class PollingModule { }
+export class PollingModule {
+  static forRoot(): ModuleWithProviders<PollingModule> {
+    return {
+      ngModule: PollingModule,
+      providers: [PollingService],
+    };
+  }
+  static forChild(config: PollingConfig): ModuleWithProviders<PollingModule> {
+    return {
+      ngModule: PollingModule,
+      providers: [
+        PollingService,
+        {
+          provide: INTERVAL,
+          useValue: config.interval || 2000,
+         },
+      ],
+    };
+  }
+}
