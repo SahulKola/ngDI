@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LoggerService } from './services/logger.service';
 import { ExpLoggerService } from './services/exp-logger.service';
+import { legacyLogger } from './services/logger.legacy';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,7 @@ import { ExpLoggerService } from './services/exp-logger.service';
   styleUrl: './app.component.scss',
   providers: [{
     provide: LoggerService,
-    useExisting: ExpLoggerService
+    useValue: legacyLogger
   }] 
 })
 export class AppComponent {
